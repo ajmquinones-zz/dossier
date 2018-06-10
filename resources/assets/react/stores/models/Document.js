@@ -4,18 +4,18 @@ let counter = 0
 
 export default class Document {
 
+  @observable uid = ''
   @observable title = ''
   @observable type = ''
   @observable size = ''
-  @observable hash = ''
   @observable url = ''
 
-  constructor(title, type, size, hash, url) {
+  constructor(uid, title, type, size, url) {
     this.id = counter++
+    this.uid = uid
     this.title = title
     this.type = type
     this.size = size
-    this.hash = hash
     this.url = url
   }
 }

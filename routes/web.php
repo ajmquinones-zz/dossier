@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/document/{uid}', '\App\Http\Controllers\Api\V1\DocumentsController@download');

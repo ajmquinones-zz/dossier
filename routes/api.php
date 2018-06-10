@@ -13,6 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:api')
+    ->prefix('v1')
+    ->namespace('Api\V1')
+    ->group(function() {
+        Route::get('/test', 'DocumentsController@test');
+        Route::get('/documents', 'DocumentsController@list')
+            ->middleware('scope:list-documents');
+        Route::post('/document', 'DocumentsController@upload')
+            ->middleware('scope:create-document');
+        Route::delete('/document/{uid}', 'DocumentsController@delete')
+            ->middleware('scope:delete-document');
+    });

@@ -71,23 +71,15 @@ export default class DocumentForm extends Component {
 
   handleUpload = () => {
     const { history, stores: { appState, documentStore } } = this.props
-    documentStore.add(
-      this.state.title,
-      this.state.file.type.substr(-3).toUpperCase(),
-      this.state.file.size,
-      'HASHT5',
-      '-'
-    )
-    appState.setSuccess('Document successfully uploaded!')
-    history.push('/')
-
+    documentStore.add(this.state.title, this.state.file, () => history.push('/'))
   }
 
   render() {
-    const { classes, theme } = this.props
+    const { classes, theme, stores: { appState } } = this.props
     return (
       <form className={classes.container} noValidate autoComplete="off">
         <TextField
+          disabled={appState.isLoading}
           inputProps={{
             id: 'title',
             name: 'title'
@@ -115,6 +107,7 @@ export default class DocumentForm extends Component {
                 </Button>
               </div> :
               <Dropzone
+                disabled={appState.isLoading}
                 multiple={false}
                 accept=".pdf,.doc,.rtf"
                 maxSize={1000000}
@@ -136,7 +129,7 @@ export default class DocumentForm extends Component {
         </div>
 
         <div>
-          <Button onClick={this.handleUpload} size="large" color="primary" variant="raised" disabled={!this.state.title || !this.state.file}>
+          <Button disabled={appState.isLoading} onClick={this.handleUpload} size="large" color="primary" variant="raised" disabled={!this.state.title || !this.state.file}>
             Upload
           </Button>
         </div>

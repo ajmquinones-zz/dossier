@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter, Switch, Route, Redirect, Link } from 'react-router-dom'
+import { observer, inject } from 'mobx-react'
+
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
@@ -28,7 +30,7 @@ const RouteSwitch = withRouter(({ location, routes }) => (
   </Switch>
 ))
 
-let RouteLinks = ({ routes, classes, location }) => (
+let RouteLinks = ({ routes, classes, location, stores: { appState } }) => (
   <Tabs
     classes={{
       flexContainer: classes.tabsContainer,
@@ -44,6 +46,7 @@ let RouteLinks = ({ routes, classes, location }) => (
       routes.map((route, index) => 
         <Tab
           key={index}
+          disabled={appState.isLoading}
           classes={{
             root: classes.tab,
             wrapper: classes.tabWrapper,
@@ -60,7 +63,9 @@ let RouteLinks = ({ routes, classes, location }) => (
     }
   </Tabs>
 )
+RouteLinks = observer(RouteLinks)
 RouteLinks = withRouter(withStyles(styles)(RouteLinks))
+RouteLinks = inject('stores')(RouteLinks)
   
 const Layout = ({ classes, routes }) => (
   <Grid container justify="center">

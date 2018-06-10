@@ -23,7 +23,9 @@ const styles = theme => ({
   tableResponsive: {
     width: "100%",
     marginTop: theme.spacing.unit * 3,
-    overflowX: "auto"
+    overflowX: "auto",
+    overflowY: 'auto',
+    height: '55vh'
   }
 })
 

@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react'
 import cx from 'classnames'
 
 import FormControl from '@material-ui/core/FormControl'
+import TextField from '@material-ui/core/TextField'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -15,11 +16,10 @@ import { FilterList as FilterIcon } from '@material-ui/icons'
 const styles = theme => ({
   root: {
     display: 'flex',
-    flexGrow: 1,
   },
   filterItems: {
     flex: '0 0 auto',
-    marginRight: 10
+    marginRight: 15
   },
   formControl: {
     margin: theme.spacing.unit,
@@ -41,7 +41,8 @@ export default class DocumentListFilters extends Component {
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    const { stores: { documentStore } } = this.props
+    documentStore.setFilter(event.target.name, event.target.value)
   }
 
   render() {
@@ -55,11 +56,11 @@ export default class DocumentListFilters extends Component {
         <FormControl className={cx(classes.formControl, classes.filterItems)}>
           <InputLabel htmlFor="filter-type">By Type</InputLabel>
           <Select
-            value={this.state.type}
+            value={documentStore.filters.get('type') || ''}
             onChange={this.handleChange}
             inputProps={{
-              name: 'type',
               id: 'filter-type',
+              name: 'type'
             }}
           >
             <MenuItem value="">
@@ -69,6 +70,17 @@ export default class DocumentListFilters extends Component {
             <MenuItem value="DOC">DOC</MenuItem>
             <MenuItem value="RTF">RTF</MenuItem>
           </Select>
+        </FormControl>
+        <FormControl className={cx(classes.formControl, classes.filterItems)}>
+          <InputLabel htmlFor="filter-title">By Title</InputLabel>
+          <TextField
+            id="filter-title"
+            name="title"
+            margin="normal"
+            style={{ marginBottom: 0 }}
+            value={documentStore.filters.get('title') || ''}
+            onChange={this.handleChange}
+          />
         </FormControl>
       </Toolbar>
     )
