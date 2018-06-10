@@ -111,10 +111,16 @@ export class DocumentStore {
       const type = this.filters.get('type')
 
       if (title && item.title.toLowerCase().includes(title.toLowerCase())) {
+        if (type && item.type.toLowerCase() !== type.toLowerCase()) {
+          return false
+        }
         return true
       }
 
       if (type && item.type.toLowerCase() === type.toLowerCase()) {
+        if (title && !item.title.toLowerCase().includes(title.toLowerCase())) {
+          return false
+        }
         return true
       }
 
