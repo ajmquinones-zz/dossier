@@ -1,4 +1,7 @@
-import { List as ListIcon, Add as AddIcon } from '@material-ui/icons'
+import { 
+  LibraryBooks as ListIcon, 
+  NoteAdd as AddIcon 
+} from '@material-ui/icons'
 import DocumentsPage from '@/pages/DocumentsPage'
 import UploadPage from '@/pages/UploadPage'
 

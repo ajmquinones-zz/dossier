@@ -72,7 +72,7 @@ const Layout = ({ classes, routes }) => (
             title: classes.cardTitle,
             content: classes.cardHeaderContent
           }}
-          title="Secure Upload Demo"
+          title="Dossier App Demo"
           action={<RouteLinks routes={routes} />}
         />
         <CardContent>
