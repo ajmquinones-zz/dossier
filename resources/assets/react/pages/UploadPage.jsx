@@ -1,22 +1,33 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-const propTypes = {
-  props: PropTypes.any
-}
+import Grid from '@material-ui/core/Grid'
+import withStyles from '@material-ui/core/styles/withStyles'
+import DocumentForm from '@/components/DocumentForm'
 
-const defaultProps = {
-}
+const styles = theme => ({
+  container: {
+    display: 'flex', 
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+})
 
-class UploadPage extends Component {
+@withStyles(styles)
+export default class UploadPage extends Component {
+
+  constructor() {
+    super()
+  }
+
   render() {
+    const { classes } = this.props
     return (
-      <div>Uploads</div>
+      <Grid container className={classes.container}>
+        <Grid item xs={8}>
+          <DocumentForm />
+        </Grid>
+      </Grid>
     )
   }
 }
-
-UploadPage.propTypes = propTypes
-UploadPage.defaultProps = defaultProps
-
-export default UploadPage

@@ -17,15 +17,16 @@ export class DocumentStore {
   }
 
   @action
-  add(document) {
-    items.push(document)
+  add(title, type, size, hash, url) {
+    const document = new Document(title, type, size, hash, url)
+    this.items.push(document)
   }
 
   @action
   remove(id) {
-    const index = items.findIndex(item => item.id === id)
+    const index = this.items.findIndex(item => item.id === id)
     if (index > -1) {
-      items.remove(items[index])
+      this.items.remove(this.items[index])
     }
   }
 

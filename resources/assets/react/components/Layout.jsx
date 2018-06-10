@@ -8,6 +8,8 @@ import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
 import withStyles from '@material-ui/core/styles/withStyles'
 
+import SuccessMessage from './SuccessMessage'
+import ErrorMessage from './ErrorMessage'
 import styles from '@jss/layout'
 
 const RouteSwitch = withRouter(({ location, routes }) => (
@@ -78,6 +80,8 @@ const Layout = ({ classes, routes }) => (
         </CardContent>
       </Card>
     </Grid>
+    <ErrorMessage />
+    <SuccessMessage />
   </Grid>
 )
 
